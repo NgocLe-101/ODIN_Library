@@ -15,6 +15,8 @@ function addBookToLibrary(book) {
 function changeBookState(btn) {
     const card = btn.closest('.card');
     card.classList.toggle('read');
+    const idx = Array.from(card.parentElement.children).indexOf(card);
+    myLibrary[idx]._read = !myLibrary[idx]._read;
 }
 
 function deleteBook(btn) {
