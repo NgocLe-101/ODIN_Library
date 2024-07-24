@@ -9,21 +9,28 @@ function Book(author, title, numPages) {
 
 function addBookToLibrary(book) {
     myLibrary.push(book);
-    render();
+    renderNewBook();
 }
 
 function changeBookState(btn) {
-    console.log(btn);
+    const card = btn.closest('.card');
+    card.classList.toggle('read');
 }
 
 function deleteBook(btn) {
-    console.log(btn);
+    const card = btn.closest('.card');
+    const idx = Array.from(card.parentElement.children).indexOf(card);
+    myLibrary.splice(idx,1);
+    const cardBox = document.querySelector('.card-box');
+    const thisCard = cardBox.querySelector(`.card:nth-child(${idx + 1})`);
+    thisCard.classList.remove('show');
+    setTimeout(() => cardBox.removeChild(thisCard), 500);
 }
 
 function createCard(book) {
-    let index = myLibrary.indexOf(book);
     const card = document.createElement('div');
     card.classList.add('card');
+    card.classList.add('show');
     if (book._read === true) {
         card.classList.add('read');
     }
@@ -37,10 +44,10 @@ function createCard(book) {
         </div>
         <div class="footer">
             <div class="btn-container">
-                <button class="btn" onclick="changeBookState(${index})">Change</button>
+                <button class="btn" onclick="changeBookState(this)">Change</button>
             </div>
             <div class="btn-container">
-                <button class="btn" onclick="deleteBook(${index})">Delete</button>
+                <button class="btn" onclick="deleteBook(this)">Delete</button>
             </div>
         </div>
     `;
@@ -48,6 +55,15 @@ function createCard(book) {
 }
 
 function render() {
+    const cardBox = document.querySelector('.card-box');
+    cardBox.innerHTML = '';
+    myLibrary.forEach(book => {
+        const card = createCard(book);
+        cardBox.appendChild(card);
+    });
+}
+
+function renderNewBook() {
     const cardBox = document.querySelector('.card-box');
     cardBox.appendChild(createCard(myLibrary[myLibrary.length - 1]));
 }
