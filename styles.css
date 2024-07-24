@@ -7,16 +7,21 @@
 
 .container {
     position: absolute;
-    width: 99vw;
+    width: 100vw;
     min-height: 100vh;
+    padding: 20px;
     background-color: #021526;
+}
+
+.container > h2 {
+    color: #fff;
+    margin-bottom: 1rem;
 }
 
 .card-box {
     background-color: #6EACDA;
     border: 2px solid #000;
-    min-height: 90vh;
-    margin: 20px;
+    min-height: 30vh;
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(5, minmax(300px, 1fr));
@@ -60,6 +65,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.card > .center > h1 {
+    text-align: center;
 }
 
 .card > .footer {
