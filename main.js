@@ -21,6 +21,7 @@ function deleteBook(btn) {
 }
 
 function createCard(book) {
+    let index = myLibrary.indexOf(book);
     const card = document.createElement('div');
     card.classList.add('card');
     if (book._read === true) {
@@ -36,10 +37,10 @@ function createCard(book) {
         </div>
         <div class="footer">
             <div class="btn-container">
-                <button class="btn" onclick="changeBookState(this)">Change</button>
+                <button class="btn" onclick="changeBookState(${index})">Change</button>
             </div>
             <div class="btn-container">
-                <button class="btn" onclick="deleteBook(this)">Delete</button>
+                <button class="btn" onclick="deleteBook(${index})">Delete</button>
             </div>
         </div>
     `;
